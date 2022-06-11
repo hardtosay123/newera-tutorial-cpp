@@ -14,10 +14,10 @@ void newrecord();
 void deleterecord();
 //deletion based on student ID entered by user
 //If record is empty, display “No record in the list”
-void displayrecord();
+//void displayrecord();
 //to display all records in the list
 //If record is empty, display “No record in the list”
-void BestStudent();
+//void BestStudent();
 //to traverse and display details of student with highest total mark
 
 classinfo *studentInfo, *first, *last;
@@ -39,6 +39,7 @@ int main()
                 newrecord();
                 break;
             case 2:
+                deleterecord();
                 break;
             case 3:
                 break;
@@ -105,17 +106,25 @@ void deleterecord() {
     int id;
     cout << "Enter id to delete a student record :";
     cin >> id;
-    classinfo *current, *prevNode, *deleteNode;
+    classinfo *current, *prevNode;
     bool isExist = false;
     current = studentInfo;
-    while (current != NULL) {
+    if (current != NULL && current->stud_id == id) {
         current = current->next;
-        if (current != NULL && current->stud_id == id) {
-            
-            deleteNode = prevNode->next;
-        }
-        else {
+        isExist = true;
+    }
+    else {
+        while (current != NULL) {
             prevNode = current;
+            current = current->next;
+            if (current != NULL && current->stud_id == id) {
+                prevNode = prevNode->next->next;
+                isExist = true;
+                break;
+            }
         }
+    }
+    if (!isExist) {
+        cout << "No record in the list" << endl;
     }
 }
