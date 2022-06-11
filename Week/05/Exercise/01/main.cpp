@@ -10,7 +10,8 @@ struct classinfo
 
 void newrecord();
 
-classinfo *studentInfo;
+classinfo *studentInfo, *first, *last;
+
 int main()
 {
     int choice = 0;
@@ -21,7 +22,7 @@ int main()
         cout << "3. Display record" << endl;
         cout << "4. Display Best Student" << endl;
         cout << "5. Quit program" << endl;
-        cout << "Enter selection:";
+        cout << "Enter selection :";
         cin >> choice;
         switch (choice) {
             case 1:
@@ -53,7 +54,7 @@ void newrecord() {
     classinfo *current;
     current = studentInfo;
     while (current != NULL) {
-        if (id == current->stud_id) {
+        if (current->stud_id == id) {
             isExist = true;
         }
         current = current->next;
@@ -71,6 +72,21 @@ void newrecord() {
         cout << "Enter final exam mark [50m] :";
         cin >> final;
         classinfo *newStudent;
-        
+        newStudent = new classinfo;
+        newStudent->stud_id = id;
+        newStudent->test = test;
+        newStudent->assignment = assignment;
+        newStudent->quiz = quiz;
+        newStudent->final = final;
+        newStudent->next = NULL;
+        if (studentInfo == NULL) {
+            studentInfo = newStudent;
+            first = studentInfo;
+            last = studentInfo;
+        }
+        else {
+            last->next = newStudent;
+            last = newStudent;
+        }
     }
 }
