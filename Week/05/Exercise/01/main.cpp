@@ -9,6 +9,16 @@ struct classinfo
 };
 
 void newrecord();
+//to read input from user
+//Error message for duplicate student ID : “Error: Duplicate student ID”
+void deleterecord();
+//deletion based on student ID entered by user
+//If record is empty, display “No record in the list”
+void displayrecord();
+//to display all records in the list
+//If record is empty, display “No record in the list”
+void BestStudent();
+//to traverse and display details of student with highest total mark
 
 classinfo *studentInfo, *first, *last;
 
@@ -87,6 +97,25 @@ void newrecord() {
         else {
             last->next = newStudent;
             last = newStudent;
+        }
+    }
+}
+
+void deleterecord() {
+    int id;
+    cout << "Enter id to delete a student record :";
+    cin >> id;
+    classinfo *current, *prevNode, *deleteNode;
+    bool isExist = false;
+    current = studentInfo;
+    while (current != NULL) {
+        current = current->next;
+        if (current != NULL && current->stud_id == id) {
+            
+            deleteNode = prevNode->next;
+        }
+        else {
+            prevNode = current;
         }
     }
 }
