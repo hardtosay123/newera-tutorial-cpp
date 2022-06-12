@@ -118,7 +118,7 @@ void deleterecord() {
             prevNode = current;
             current = current->next;
             if (current != NULL && current->stud_id == id) {
-                prevNode = prevNode->next->next;
+                prevNode->next = prevNode->next->next;
                 isExist = true;
                 break;
             }
