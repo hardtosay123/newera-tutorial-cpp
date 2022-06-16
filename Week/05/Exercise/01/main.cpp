@@ -117,7 +117,9 @@ void deleterecord() {
         else {
             studentInfo = studentInfo->next;
         }
+        delete current;
     }
+    current = studentInfo;
     while (current != NULL) {
         
         current = current->next;
