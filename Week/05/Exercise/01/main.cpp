@@ -14,7 +14,7 @@ void newrecord();
 void deleterecord();
 //deletion based on student ID entered by user
 //If record is empty, display “No record in the list”
-//void displayrecord();
+void displayrecord();
 //to display all records in the list
 //If record is empty, display “No record in the list”
 //void BestStudent();
@@ -42,13 +42,11 @@ int main()
                 deleterecord();
                 break;
             case 3:
+                displayrecord();
                 break;
             case 4:
                 break;
-            case 5:
-                break;
         }
-
     } while (choice != 5);
     
     return 0;
@@ -106,23 +104,40 @@ void deleterecord() {
     int id;
     cout << "Enter id to delete a student record :";
     cin >> id;
-    classinfo *current, *prevNode;
+    classinfo *current, *deletedNode, *prevNode;
     bool isExist = false;
     current = studentInfo;
     if (current != NULL && current->stud_id == id) {
-        current = current->next;
-        isExist = true;
-    }
-    else {
-        while (current != NULL) {
-            prevNode = current;
-            current = current->next;
-            if (current != NULL && current->stud_id == id) {
-                prevNode->next = prevNode->next->next;
-                isExist = true;
-                break;
-            }
+        if (current->next == NULL) {
+            studentInfo = NULL;
+            first = studentInfo;
+            last = studentInfo;
+            //current = studentInfo;
         }
+        else {
+            studentInfo = studentInfo->next;
+        }
+    }
+    while (current != NULL) {
+        
+        current = current->next;
+    }
+    if (!isExist) {
+        cout << "No record in the list" << endl;
+    }
+}
+
+void displayrecord() {
+    bool isExist = false;
+    classinfo *current;
+    current = studentInfo;
+    if (current != NULL) {
+        cout << "id" << ", " << "test" << ", " << "assignment" << ", " << "quiz" << ", " << "final" << endl;
+    }
+    while (current != NULL) {
+        isExist = true;
+        cout << current->stud_id << ", " << current->test << ", " << current->assignment << ", " << current->quiz << ", " << current->final << endl;
+        current = current->next;
     }
     if (!isExist) {
         cout << "No record in the list" << endl;
