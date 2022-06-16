@@ -108,6 +108,7 @@ void deleterecord() {
     bool isExist = false;
     current = studentInfo;
     if (current != NULL && current->stud_id == id) {
+        isExist = true;
         if (current->next == NULL) {
             studentInfo = NULL;
             first = studentInfo;
@@ -119,10 +120,16 @@ void deleterecord() {
         }
         delete current;
     }
-    current = studentInfo;
-    while (current != NULL) {
-        
-        current = current->next;
+    else {
+        while (current != NULL) {
+            if (current->next != NULL && current->next->stud_id == id) {
+                isExist = true;
+                deletedNode = current->next;
+                current->next = current->next->next;
+                delete deletedNode;
+            }
+            current = current->next;
+        }
     }
     if (!isExist) {
         cout << "No record in the list" << endl;
