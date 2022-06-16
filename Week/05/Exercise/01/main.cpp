@@ -17,7 +17,7 @@ void deleterecord();
 void displayrecord();
 //to display all records in the list
 //If record is empty, display “No record in the list”
-//void BestStudent();
+void BestStudent();
 //to traverse and display details of student with highest total mark
 
 classinfo *studentInfo, *first, *last;
@@ -45,6 +45,7 @@ int main()
                 displayrecord();
                 break;
             case 4:
+                BestStudent();
                 break;
         }
     } while (choice != 5);
@@ -152,5 +153,32 @@ void displayrecord() {
     }
     if (!isExist) {
         cout << "No record in the list" << endl;
+    }
+}
+
+void BestStudent() {
+    if (studentInfo == NULL) {
+        cout << "No record in the list" << endl;
+    }
+    else {
+        float higherTotalMark = 0.00;
+        classinfo *current;
+        current = studentInfo;
+        while (current != NULL) {
+            float currentMark = current->test + current->assignment + current->quiz + current->final;
+            if (currentMark > higherTotalMark) {
+                higherTotalMark = currentMark;
+            }
+            current = current->next;
+        }
+        current = studentInfo;
+        cout << "id" << ", " << "test" << ", " << "assignment" << ", " << "quiz" << ", " << "final" << endl;
+        while (current != NULL) {
+            float currentMark = current->test + current->assignment + current->quiz + current->final;
+            if (currentMark == higherTotalMark) {
+                cout << current->stud_id << ", " << current->test << ", " << current->assignment << ", " << current->quiz << ", " << current->final << endl;
+            }
+            current = current->next;
+        }
     }
 }
