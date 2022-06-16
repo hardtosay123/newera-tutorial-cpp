@@ -113,7 +113,6 @@ void deleterecord() {
             studentInfo = NULL;
             first = studentInfo;
             last = studentInfo;
-            //current = studentInfo;
         }
         else {
             studentInfo = studentInfo->next;
@@ -126,6 +125,9 @@ void deleterecord() {
                 isExist = true;
                 deletedNode = current->next;
                 current->next = current->next->next;
+                if (current->next == NULL) {
+                    last = current;
+                }
                 delete deletedNode;
             }
             current = current->next;
