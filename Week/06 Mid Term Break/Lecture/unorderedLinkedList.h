@@ -17,25 +17,25 @@ public:
 
     void insertFirst(const Type& newItem);
       //Function to insert newItem at the beginning of the list.
-      //Postcondition: first points to the new list, newItem is
+      //Postcondition: this->first points to the new list, newItem is
       //               inserted at the beginning of the list,
-      //               last points to the last node in the  
-      //               list, and count is incremented by 1.
+      //               this->last points to the this->last node in the  
+      //               list, and this->count is incremented by 1.
 
     void insertLast(const Type& newItem);
       //Function to insert newItem at the end of the list.
-      //Postcondition: first points to the new list, newItem 
+      //Postcondition: this->first points to the new list, newItem 
       //               is inserted at the end of the list,
-      //               last points to the last node in the 
-      //               list, and count is incremented by 1.
+      //               this->last points to the this->last node in the 
+      //               list, and this->count is incremented by 1.
 
     void deleteNode(const Type& deleteItem);
       //Function to delete deleteItem from the list.
       //Postcondition: If found, the node containing 
       //               deleteItem is deleted from the list.
-      //               first points to the first node, last
-      //               points to the last node of the updated 
-      //               list, and count is decremented by 1.
+      //               this->first points to the this->first node, this->last
+      //               points to the this->last node of the updated 
+      //               list, and this->count is decremented by 1.
 };
 
 
@@ -46,7 +46,7 @@ bool unorderedLinkedList<Type>::
     nodeType<Type> *current; //pointer to traverse the list
     bool found = false;
     
-    current = first; //set current to point to the first 
+    current = this->first; //set current to point to the this->first 
                      //node in the list
 
     while (current != NULL && !found)    //search the list
@@ -66,14 +66,14 @@ void unorderedLinkedList<Type>::insertFirst(const Type& newItem)
     newNode = new nodeType<Type>; //create the new node
 
     newNode->info = newItem;    //store the new item in the node
-    newNode->link = first;      //insert newNode before first
-    first = newNode;            //make first point to the
-                                //actual first node
-    count++;                    //increment count
+    newNode->link = this->first;      //insert newNode before this->first
+    this->first = newNode;            //make this->first point to the
+                                //actual this->first node
+    this->count++;                    //increment this->count
 
-    if (last == NULL)   //if the list was empty, newNode is also 
-                        //the last node in the list
-        last = newNode;
+    if (this->last == NULL)   //if the list was empty, newNode is also 
+                        //the this->last node in the list
+        this->last = newNode;
 }//end insertFirst
 
 template <class Type>
@@ -87,19 +87,19 @@ void unorderedLinkedList<Type>::insertLast(const Type& newItem)
     newNode->link = NULL;     //set the link field of newNode
                               //to NULL
 
-    if (first == NULL)  //if the list is empty, newNode is 
-                        //both the first and last node
+    if (this->first == NULL)  //if the list is empty, newNode is 
+                        //both the this->first and this->last node
     {
-        first = newNode;
-        last = newNode;
-        count++;        //increment count
+        this->first = newNode;
+        this->last = newNode;
+        this->count++;        //increment this->count
     }
-    else    //the list is not empty, insert newNode after last
+    else    //the list is not empty, insert newNode after this->last
     {
-        last->link = newNode; //insert newNode after last
-        last = newNode; //make last point to the actual 
-                        //last node in the list
-        count++;        //increment count
+        this->last->link = newNode; //insert newNode after this->last
+        this->last = newNode; //make this->last point to the actual 
+                        //this->last node in the list
+        this->count++;        //increment this->count
     }
 }//end insertLast
 
@@ -111,26 +111,26 @@ void unorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
     nodeType<Type> *trailCurrent; //pointer just before current
     bool found;
 
-    if (first == NULL)    //Case 1; the list is empty. 
+    if (this->first == NULL)    //Case 1; the list is empty. 
         cout << "Cannot delete from an empty list."
              << endl;
     else
     {
-        if (first->info == deleteItem) //Case 2 
+        if (this->first->info == deleteItem) //Case 2 
         {
-            current = first;
-            first = first->link;
-            count--;
-            if (first == NULL)    //the list has only one node
-                last = NULL;
+            current = this->first;
+            this->first = this->first->link;
+            this->count--;
+            if (this->first == NULL)    //the list has only one node
+                this->last = NULL;
             delete current;
         }
         else //search the list for the node with the given info
         {
             found = false;
-            trailCurrent = first;  //set trailCurrent to point
-                                   //to the first node
-            current = first->link; //set current to point to 
+            trailCurrent = this->first;  //set trailCurrent to point
+                                   //to the this->first node
+            current = this->first->link; //set current to point to 
                                    //the second node
 
             while (current != NULL && !found)
@@ -147,12 +147,12 @@ void unorderedLinkedList<Type>::deleteNode(const Type& deleteItem)
             if (found) //Case 3; if found, delete the node
             {
                 trailCurrent->link = current->link;
-                count--;
+                this->count--;
 
-                if (last == current)   //node to be deleted 
-                                       //was the last node
-                    last = trailCurrent; //update the value 
-                                         //of last
+                if (this->last == current)   //node to be deleted 
+                                       //was the this->last node
+                    this->last = trailCurrent; //update the value 
+                                         //of this->last
                 delete current;  //delete the node from the list
             }
             else
