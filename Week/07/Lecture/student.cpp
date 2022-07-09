@@ -18,6 +18,7 @@ int main()
         cout << "1. Insert Students Grade" << endl;
         cout << "2. Show Higher GPA Students" << endl;
         cout << "0. Exit" << endl;
+        cout << "Your choices : ";
         cin >> choice;
         switch (choice) {
             case 1:
