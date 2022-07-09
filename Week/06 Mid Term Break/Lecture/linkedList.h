@@ -118,6 +118,8 @@ public:
       //Function to output the data contained in each node.
       //Postcondition: none
 
+    void reversePrint() const;
+
     int length() const;
       //Function to return the number of nodes in the list.
       //Postcondition: The value of count is returned.
@@ -258,6 +260,21 @@ void linkedListType<Type>::print() const
         current = current->link;
     }
 }//end print
+
+template <class Type>
+void linkedListType<Type>::reversePrint() const
+{
+    nodeType<Type>* current;
+
+    int theLast = this->count;
+    for (int i = 1; i <= theLast; i++) {
+        current = first;
+        for (int j = 1; j < theLast; j++) {
+            current = current->link;
+        }
+        cout << current->info << endl;
+    }
+}
 
 template <class Type>
 int linkedListType<Type>::length() const
