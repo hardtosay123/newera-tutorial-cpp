@@ -29,9 +29,7 @@ int main()
 
                 if (gpa > higherGPA) {
                     higherGPA = gpa;
-                    while (!studentName.isEmptyStack()) {
-                        studentName.pop();
-                    }
+                    studentName.initializeStack();
                     studentName.push(name);
                 }
                 else if (gpa == higherGPA) {
