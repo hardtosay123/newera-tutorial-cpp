@@ -34,7 +34,9 @@ int main()
                     studentName.push(name);
                 }
                 else if (gpa == higherGPA) {
-                    studentName.push(name);
+                    if (!studentName.isFullStack()) {
+                        studentName.push(name);
+                    }
                 }
                 break;
             case 2:
